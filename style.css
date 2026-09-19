@@ -20,18 +20,7 @@
   padding: 0;
 }
 
-/* Page Entry Keyframe Animations */
-@keyframes fadeInPage {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Base Body Styles */
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
@@ -40,10 +29,75 @@ body {
   max-width: 720px;
   margin: 0 auto;
   padding: 40px 20px 80px;
-  animation: fadeInPage 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-x: hidden;
 }
 
-/* Hero Header with Profile */
+/* ===================================================
+   OPENING & ENTRANCE ANIMATIONS
+   =================================================== */
+
+@keyframes openingFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 133, 162, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+  }
+}
+
+/* Staggered Loading: Bawat section ay may sunod-sunod na delay */
+.hero-header {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#about {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  opacity: 0; /* Unseen bago mag-load */
+}
+
+#skills {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+#projects {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  opacity: 0;
+}
+
+#experience {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  opacity: 0;
+}
+
+#contact {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+  opacity: 0;
+}
+
+footer {
+  animation: openingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  opacity: 0;
+}
+
+/* ===================================================
+   LAYOUT & COMPONENTS
+   =================================================== */
+
 .hero-header {
   padding-bottom: 36px;
   border-bottom: 1px solid var(--border-color);
@@ -60,14 +114,14 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--accent-pink);
-  box-shadow: 0 0 25px rgba(255, 51, 102, 0.4);
+  animation: pulseGlow 4s infinite ease-in-out;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px rgba(255, 133, 162, 0.6);
+  transform: scale(1.08) rotate(2deg);
+  border-color: var(--accent-red);
 }
 
 .hero-name {
@@ -96,7 +150,6 @@ body {
 .section {
   padding: 36px 0;
   border-bottom: 1px solid var(--border-color);
-  transition: transform 0.3s ease;
 }
 
 .index-tag {
@@ -133,7 +186,7 @@ body {
   background-color: var(--tag-bg);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .editorial-link:hover {
@@ -141,7 +194,7 @@ body {
   background-color: var(--accent-rose);
   color: #ffffff;
   box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .violet-link {
@@ -170,7 +223,7 @@ body {
 
 .mono-link:hover {
   color: var(--accent-red);
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 /* Skills */
@@ -211,8 +264,8 @@ body {
 
 .project-card:hover {
   border-color: var(--accent-red);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(255, 51, 102, 0.15);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 10px 30px rgba(255, 51, 102, 0.2);
 }
 
 .project-img {
@@ -223,11 +276,12 @@ body {
   border: 1px solid var(--border-color);
   margin-bottom: 16px;
   display: block;
-  transition: opacity 0.3s ease;
+  transition: border-color 0.3s ease, filter 0.3s ease;
 }
 
 .project-card:hover .project-img {
   border-color: var(--accent-pink);
+  filter: brightness(1.05);
 }
 
 .project-title {
